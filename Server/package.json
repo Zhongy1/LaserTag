@@ -1,0 +1,17 @@
+{
+  "name": "lasertagserver",
+  "version": "1.0.0",
+  "description": "Server component of laser tag system",
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "Zhongyi Chen <zhongyi753@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-node": "^8.4.1"
+  },
+  "dependencies": {
+    "typescript": "^3.6.3",
+    "ws": "^7.1.2"
+  }
+}
