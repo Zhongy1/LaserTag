@@ -20,6 +20,11 @@ wss.on('connection', function connection(ws) {
     });
 
     ws.send('something');
+    console.log(ws);
+    setInterval(() => {
+    	ws.send('spamming you');
+	console.log('trying to send');
+    }, 1000);
 });
 
 
