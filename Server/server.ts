@@ -17,14 +17,14 @@ server.on('request', app);
 wss.on('connection', function connection(ws) {
     ws.on('message', function incoming(message) {
         console.log('received: %s', message);
+        if (message == 'yes') {
+            console.log('server has received a yes message');
+        }
+        if (message == 'no') {
+            console.log('server has received a no message, requesting a yes message from client');
+            ws.send('I need a yes from you');
+        }
     });
-
-    ws.send('something');
-    console.log(ws);
-    setInterval(() => {
-    	ws.send('spamming you');
-	console.log('trying to send');
-    }, 1000);
 });
 
 
