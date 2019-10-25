@@ -1,8 +1,8 @@
-
+include <variables.scad>
 //GunPieceBottom();
 //boardCutout();
 
-
+//solidBlock([tempVar, tempVar, tempVar]);
 difference(){
         GunPieceBottom();
         #boardCutout();
@@ -20,12 +20,12 @@ module GunPieceBottom(){
 }
 
 module boardCutout(){
-    translate([0, 0, 6]){
-        solidBlock([35, 20, 4]);
+    translate([0, 0, 11]){
+        solidBlock([35, 20, 4 + 0.01]);
     }
 }    
 
 module solidBlock(dimensions){
-    translate([0, 0, dimensions[2]/2]);
+    translate([0, 0, dimensions[2]/2])
         cube(dimensions, true);
 }
