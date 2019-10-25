@@ -1,3 +1,4 @@
+
 /*
  * WebSocketClient.ino
  *
@@ -18,7 +19,9 @@ ESP8266WiFiMulti WiFiMulti;
 WebSocketsClient webSocket;
 
 #define USE_SERIAL Serial
-
+void sendHexToServer(String s){
+  webSocket.sendTXT(s);
+}
 void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
 
   switch(type) {
@@ -94,6 +97,7 @@ void loop() {
   curTimer = millis();
   if(curTimer > timer+3000){
     timer = curTimer;
-    webSocket.sendTXT("Hello World!");
+    sendHexToServer("Hi");
+//    webSocket.sendTXT("Hello World!");
   }
 }
