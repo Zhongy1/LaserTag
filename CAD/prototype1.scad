@@ -6,6 +6,7 @@
 difference(){
         GunPieceBottom();
         #boardCutout();
+        #batteryCutOut();
 }
 
 module GunPieceBottom(){
@@ -21,9 +22,17 @@ module GunPieceBottom(){
 
 module boardCutout(){
     translate([0, 0, 6]){
-        solidBlock([35, 20, 4]);
+        solidBlock([35, 20, 4 + 0.01]);
     }
-}    
+}  
+
+module batteryCutOut(){
+    translate([50, 20, 4]){
+        rotate([0, 0, 65]){
+            solidBlock([45, 20, 10]);
+        }
+    }
+}
 
 module solidBlock(dimensions){
     translate([0, 0, dimensions[2]/2]);
