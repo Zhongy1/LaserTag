@@ -5,7 +5,8 @@ include <variables.scad>
 //solidBlock([tempVar, tempVar, tempVar]);
 difference(){
         GunPieceBottom();
-        #boardCutout();
+        boardCutout();
+        batteryCutOut();
 }
 
 module GunPieceBottom(){
@@ -23,7 +24,15 @@ module boardCutout(){
     translate([0, 0, 11]){
         solidBlock([35, 20, 4 + 0.01]);
     }
-}    
+}  
+
+module batteryCutOut(){
+    translate([50, 20, 5]){
+        rotate([0, 0, 65]){
+            solidBlock([45, 20, 10.01]);
+        }
+    }
+}
 
 module solidBlock(dimensions){
     translate([0, 0, dimensions[2]/2])
