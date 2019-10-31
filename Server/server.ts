@@ -39,7 +39,13 @@ wss.on('connection', function connection(ws) {
                 console.log('-> converting from hex to string:');
                 let hexMessage: string = StringDecoder.hexToString(message);
                 console.log('-> ' + hexMessage);
-                ws.send('message received');
+
+                if (hexMessage == null)
+                    ws.send("invalid");
+                else
+                    ws.send('received');
+
+                break;
         }
     });
 });
