@@ -38,6 +38,7 @@ wss.on('connection', function connection(ws) {
             case '/getoutput':
                 console.log('Client is asking for an the output signal to use; giving it 20DF10EF');
                 ws.send('0220DF10EF');
+                break;
 
             default:
                 console.log('-> converting from hex to string:');
