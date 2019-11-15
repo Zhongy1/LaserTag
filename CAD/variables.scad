@@ -1,9 +1,10 @@
 circBrdT = 1.59; //TBD
 circBrdSolderSpace = 3;
-ledBrdW = 10;
-ledBrdL = 10;
-ledHousingD = 5.4;
-ledHousingH = 0; //TBD
+ledBrdW = 1.5;
+ledBrdL = 12.3;
+ledBrdH = 14.8;
+ledHousingD = 14.4;
+ledHousingW = 5.7; //TBD
 microCtlrHousingW = 47.92 + 1; 
 microCtlrHousingL = 30.38 + 1; 
 microCtlrHousingH = 17.4 + 1; //TBD
