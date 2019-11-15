@@ -29,6 +29,7 @@ module GunPieceBottom(offset = [0, 0, 0], rotation = [0, 0, 0]){
             #batteryCutOut([82, -40, gunPieceBotH - batteryHousingH + batteryHousingH / 2], [0, 0, -155]);
             #boostCnvtr([81, 0, gunPieceBotH - cnvrtrHousingH / 2], [0, 0, -155]);
             #switchCutout([56, -44, gunPieceBotH - switchHousingH / 2], [0, 0, -155]);
+            #ledCutout([-75, 0, gunPieceBotH - ledHousingD / 2]);
         }
             
         
@@ -75,9 +76,9 @@ module boostCnvtr(offset = [0, 0, 0], rotation = [0, 0, 0]){
 module ledCutout(offset = [0, 0, 0], rotation = [0, 0, 0]){
     translate(offset) rotate(rotation){
         
-        //TBD
-        //solidBlock([cnvrtrHousingW, cnvrtrHousingL, cnvrtrHousingH]);
-        
+        //TBD - ledHousingH 
+        solidBlock([ledBrdW, ledBrdL, ledHousingD]);
+
         
     }
 }
