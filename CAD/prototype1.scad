@@ -28,7 +28,7 @@ module GunPieceBottom(offset = [0, 0, 0], rotation = [0, 0, 0]){
             #ctlrCutout([0, 0, gunPieceBotH - microCtlrHousingH + microCtlrHousingH / 2]);
             #batteryCutOut([82, -40, gunPieceBotH - batteryHousingH + batteryHousingH / 2], [0, 0, -155]);
             #boostCnvtr([81, 0, gunPieceBotH - cnvrtrHousingH / 2], [0, 0, -155]);
-            #switchCutout([56, -44, gunPieceBotH - switchHousingH / 2], [0, 0, -155]);
+            #switchCutout([49, -27, gunPieceBotH - switchHousingH / 2], [0, 0, -155]);
             #ledCutout([-70.5, 0, gunPieceBotH - ledBrdH / 2]);
             #ledLightCutout([-72.5, 0, gunPieceBotH - ledHousingW / 2]);
         }
@@ -46,6 +46,11 @@ module boardCutout(){
 module batteryCutOut(offset = [0, 0, 0], rotation = [0, 0, 0]){
     translate(offset) rotate(rotation){
         solidBlock([batteryHousingW, batteryHousingL, batteryHousingH]);
+        for(i = [-1:2:1]){
+            translate([0,i * (batteryHousingL + batteryContactsH) / 2, -(batteryContactsW - batteryHousingH) / 2])
+                solidBlock([batteryContactsW, batteryContactsH, batteryContactsW]);
+        }
+        
     }
 }
 
