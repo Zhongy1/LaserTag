@@ -2,34 +2,32 @@
 #include <IRremoteESP8266.h>
 #include <IRsend.h>
 
-const uint16_t sendPin = 1;
-bool switchFlag = false;
+long outputSignal = 0x20DF10EF;
+const uint16_t detectPin = D2;
+const uint16_t sendPin = D1;
+bool pressed = false;
+bool alreadyPressed = false;
 
 IRsend irsend(sendPin);
 
 void setup() {
+  Serial.begin(115200);
+  delay(3000);
+  //IR
   irsend.begin();
-
-  attachInterrupt(digitalPinToInterrupt(sendPin), triggerPull, HIGH);
+  pinMode(sendPin, OUTPUT);
+  pinMode(detectPin, INPUT_PULLUP);
 }
 
 void loop() {
-  if(switchFlag){
-    //send to transistor
-    //TODO add in an actual LG signal
-    Serial.println("NEC");
-    irsend.sendNEC(data, bits)
-    switchFlag = false;
-
-    //add in trigger delay? corrispond to rate of fire
+  pressed = digitalRead(detectPin);
+  if (pressed && !alreadyPressed) {
+    alreadyPressed = true;
+    irsend.sendNEC(outputSignal);
+    Serial.print("Current output signal in DEC: ");
+    Serial.println(outputSignal);
   }
-  delay(10);
-}
-
-void triggerPull(){
-  switchFlag = true;
-}
-
-void emitHex(long int input){
-  
+  else if (!pressed && alreadyPressed) {
+    alreadyPressed = false;
+  }
 }

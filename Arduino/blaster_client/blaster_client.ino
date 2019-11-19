@@ -36,7 +36,7 @@ void setup() {
     delay(100);
   }
   Serial.println("Local IP: " + WiFi.localIP());
-  webSocket.begin("10.21.211.182", 8080, "/");
+  webSocket.begin("10.21.211.182", 8080, "/");    //IP should be changed accordingly
   webSocket.onEvent(webSocketEvent);
   webSocket.setReconnectInterval(5000);
   
@@ -138,6 +138,7 @@ long hexStringToNum(uint8_t * hex) {
     else if (c >= 97 && c <= 102) {
       num = (num << 4) + (c - 87);
     }
+    i++;
   }
   return num;
 }
@@ -146,6 +147,7 @@ void strcopy(uint8_t* str, uint8_t* input) {
   int i = 0;
   while(input[i] != '\0') {
     str[i] = input[i];
+    i++;
   }
 }
 
