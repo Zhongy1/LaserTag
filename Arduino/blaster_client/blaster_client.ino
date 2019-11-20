@@ -24,6 +24,7 @@ const uint16_t detectPin = D2;
 const uint16_t sendPin = D1;
 bool pressed = false;
 bool alreadyPressed = false;
+int count = 0;
 
 IRsend irsend(sendPin);
 
@@ -49,6 +50,8 @@ void setup() {
 void loop() {
   pressed = digitalRead(detectPin);
   if (pressed && !alreadyPressed) {
+    counter++;
+    webSocket.sendTXT("/sendMsg Trigger has been pulled this many times: " +counter);
     alreadyPressed = true;
     irsend.sendNEC(outputSignal);
     Serial.print("Current output signal in DEC: ");
@@ -150,4 +153,3 @@ void strcopy(uint8_t* str, uint8_t* input) {
     i++;
   }
 }
-
