@@ -1,4 +1,4 @@
-circBrdT = 1.59; //TBD
+circBrdT = 1.59; //exact
 circBrdSolderSpace = 3;
 ledBrdW = circBrdT + 0.4;
 ledBrdL = 14.8;
@@ -7,7 +7,7 @@ ledHousingD = 5.7;
 ledHousingW = 8.0; //TBD
 microCtlrHousingW = 50.6 + 1; 
 microCtlrHousingL = 30.38 + 1; 
-microCtlrHousingH = 17.4 + 1; //TBD
+microCtlrHousingH = 20.4 + 1; 
 switchHousingW = 22.44 + 1; //TBD
 switchHousingL = 38.03 + 1; //TBD
 switchHousingH = 10.13 + 1; //TBD
