@@ -24,10 +24,10 @@ module GunPieceBottom(offset = [0, 0, 0], rotation = [0, 0, 0]){
                         solidBlock([gunPieceHandleW, gunPieceHandleL, gunPieceBotH]);
                     }
                 }
-            }
-            #ctlrCutout([0, 0, gunPieceBotH - microCtlrHousingH + microCtlrHousingH / 2]);
-            #batteryCutOut([82, -40, gunPieceBotH - batteryHousingH + batteryHousingH / 2], [0, 0, -155]);
-            #boostCnvtr([81, 0, gunPieceBotH - cnvrtrHousingH / 2], [0, 0, -155]);
+            }         
+            #ctlrCutout([-20, -10, gunPieceBotH], [-90, 0, 0]);
+            #batteryCutOut([85, -38, gunPieceBotH - batteryHousingH + batteryHousingH / 2], [0, 0, -155]);
+            #boostCnvtr([50, 10, gunPieceBotH - cnvrtrHousingH / 2], [0, 0, -90]);
             #switchCutout([49, -27, gunPieceBotH - switchHousingH / 2], [0, 0, -155]);
             #ledCutout([-70.5, 0, gunPieceBotH - ledBrdH / 2]);
             #ledLightCutout([-72.5, 0, gunPieceBotH - ledHousingW / 2]);
@@ -60,10 +60,19 @@ module solidBlock(dimensions){
 }
 
 module ctlrCutout(offset = [0, 0, 0], rotation = [0, 0, 0]){
+    ctlrRegionL = microCtlrHousingL - 6;
+    legH = 3;
+    brdT = circBrdT + 0.4;
+    
+    
     translate(offset) rotate(rotation){
         
         
-        solidBlock([microCtlrHousingW, microCtlrHousingL, microCtlrHousingH]);
+        solidBlock([microCtlrHousingW, ctlrRegionL, microCtlrHousingH]);
+        
+        translate([0, 0, legH]){
+            solidBlock([microCtlrHousingW, microCtlrHousingL, brdT]);
+        }
         
         
     }
