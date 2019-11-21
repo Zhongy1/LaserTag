@@ -24,13 +24,11 @@ module GunPieceBottom(offset = [0, 0, 0], rotation = [0, 0, 0]){
                         solidBlock([gunPieceHandleW, gunPieceHandleL, gunPieceBotH]);
                     }
                 }
-<<<<<<< HEAD
-            }
-            #ctlrCutout([0, 0, gunPieceBotH - microCtlrHousingH + microCtlrHousingH / 2]);
-            #batteryCutOut([82, -40, gunPieceBotH - batteryHousingH + batteryHousingH / 2], [0, 0, -155]);
-            #boostCnvtr([81, 0, gunPieceBotH - cnvrtrHousingH / 2], [0, 0, -155]);
-            
-            #switchCutout([56, -44, gunPieceBotH - switchHousingH / 2], [0, 0, -155]);
+            }         
+            #ctlrCutout([-20, -10, gunPieceBotH], [-90, 0, 0]);
+            #batteryCutOut([85, -38, gunPieceBotH - batteryHousingH + batteryHousingH / 2], [0, 0, -155]);
+            #boostCnvtr([50, 10, gunPieceBotH - cnvrtrHousingH / 2], [0, 0, -90]);
+            #switchCutout([49, -27, gunPieceBotH - switchHousingH / 2], [0, 0, -155]);
             #ledCutout([-75, 0, gunPieceBotH]);
            
             /* wire path 
@@ -53,16 +51,6 @@ module GunPieceBottom(offset = [0, 0, 0], rotation = [0, 0, 0]){
                 solidBlock([0, 0, microCtlrHousingH]);
             }
             */    
-            
-=======
-            }         
-            #ctlrCutout([-20, -10, gunPieceBotH], [-90, 0, 0]);
-            #batteryCutOut([85, -38, gunPieceBotH - batteryHousingH + batteryHousingH / 2], [0, 0, -155]);
-            #boostCnvtr([50, 10, gunPieceBotH - cnvrtrHousingH / 2], [0, 0, -90]);
-            #switchCutout([49, -27, gunPieceBotH - switchHousingH / 2], [0, 0, -155]);
-            #ledCutout([-70.5, 0, gunPieceBotH - ledBrdH / 2]);
-            #ledLightCutout([-72.5, 0, gunPieceBotH - ledHousingW / 2]);
->>>>>>> 68fdb97e9392492647c82f6de608ee334aa38f81
         }
             
         
