@@ -26,31 +26,41 @@ module GunPieceBottom(offset = [0, 0, 0], rotation = [0, 0, 0]){
                 }
             }         
             #ctlrCutout([-20, -10, gunPieceBotH], [-90, 0, 0]);
-            #batteryCutOut([85, -38, gunPieceBotH - batteryHousingH + batteryHousingH / 2], [0, 0, -155]);
-            #boostCnvtr([50, 10, gunPieceBotH - cnvrtrHousingH / 2], [0, 0, -90]);
+            #batteryCutOut([80, -30, gunPieceBotH - batteryHousingH + batteryHousingH / 2], [0, 0, -155]);
+            #boostCnvtr([35, 15, gunPieceBotH - cnvrtrHousingH / 2], [0, 0, -90]);
             #switchCutout([49, -27, gunPieceBotH - switchHousingH / 2], [0, 0, -155]);
             #ledCutout([-75, 0, gunPieceBotH]);
            
-            /* wire path 
-            translate([0, 0, 0]){
-                solidBlock([0, 0, microCtlrHousingH]);
+            wirePathW = 5;
+            //led to micro controller wire path
+            #translate([-48, 0, gunPieceBotH - microCtlrHousingL / 2]){
+                solidBlock([7, wirePathW, microCtlrHousingL]);
             }
-            translate([0, 0, 0]){
-                solidBlock([0, 0, microCtlrHousingH]);
+            //boost converter wire path
+            #translate([12, 9, gunPieceBotH - microCtlrHousingL / 2])rotate([0, 0, 45]){
+                solidBlock([22, wirePathW, microCtlrHousingL]);
             }
-            translate([0, 0, 0]){
-                solidBlock([0, 0, microCtlrHousingH]);
+            //switch wire paths
+            #translate([20, -13, gunPieceBotH - microCtlrHousingL / 2])rotate([0, 0, -15]){
+                solidBlock([42, wirePathW, microCtlrHousingL]);
             }
-            translate([0, 0, 0]){
-                solidBlock([0, 0, microCtlrHousingH]);
+            //battery wire paths
+            #translate([60, 5, gunPieceBotH - microCtlrHousingL / 2])rotate([0, 0, -35]){
+                solidBlock([35, wirePathW-2, microCtlrHousingL]);
+            }  
+            #translate([66, 15, gunPieceBotH - microCtlrHousingL / 2])rotate([0, 0, -10]){
+                solidBlock([25, wirePathW-2, microCtlrHousingL]);
             }
-            translate([0, 0, 0]){
-                solidBlock([0, 0, microCtlrHousingH]);
+            #translate([94, -23, gunPieceBotH - microCtlrHousingL / 2])rotate([0, 0, -65]){
+                solidBlock([82, wirePathW-2, microCtlrHousingL]);
             }
-            translate([0, 0, 0]){
-                solidBlock([0, 0, microCtlrHousingH]);
+            #translate([105, -64, gunPieceBotH - microCtlrHousingL / 2])rotate([0, 0, 25]){
+                solidBlock([18, wirePathW-2, microCtlrHousingL]);
             }
-            */    
+            #translate([96, -64, gunPieceBotH - microCtlrHousingL / 2])rotate([0, 0, -65]){
+                solidBlock([10, wirePathW-2, microCtlrHousingL]);
+            }
+               
         }
             
         
