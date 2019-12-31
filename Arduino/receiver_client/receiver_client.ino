@@ -12,11 +12,16 @@
 #include <ESP8266WiFiMulti.h>
 
 #include <WebSocketsClient.h>
-
-#include <Hash.h>
+#include <IRremoteESP8266.h>
+#include <IRrecv.h>
+#include <IRutils.h>
 
 ESP8266WiFiMulti WiFiMulti;
 WebSocketsClient webSocket;
+
+const uint16_t kRecvPin = D1;
+IRrecv irrecv(kRecvPin);
+decode_results results;
 
 #define USE_SERIAL Serial
 void sendHexToServer(String s){
@@ -32,7 +37,7 @@ void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
       USE_SERIAL.printf("[WSc] Connected to url: %s\n", payload);
 
       // send message to server when Connected
-      webSocket.sendTXT("Connected");
+      // webSocket.sendTXT("Connected");
     }
       break;
     case WStype_TEXT:
@@ -53,51 +58,32 @@ void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
 }
 
 void setup() {
-  // USE_SERIAL.begin(921600);
-  USE_SERIAL.begin(115200);
-
-  //Serial.setDebugOutput(true);
-  USE_SERIAL.setDebugOutput(true);
-
-  USE_SERIAL.println();
-  USE_SERIAL.println();
-  USE_SERIAL.println();
-
-  for(uint8_t t = 4; t > 0; t--) {
-    USE_SERIAL.printf("[SETUP] BOOT WAIT %d...\n", t);
-    USE_SERIAL.flush();
-    delay(1000);
-  }
-
+  Serial.begin(115200);
+  delay(3000);
   WiFiMulti.addAP("LugBuild", "esp8266testing");
-
-  //WiFi.disconnect();
   while(WiFiMulti.run() != WL_CONNECTED) {
     delay(100);
   }
-
-  // server address, port and URL
-  webSocket.begin("192.168.12.1", 8080, "/");
-
-  // event handler
+  Serial.println("Local IP: " + WiFi.localIP());
+  webSocket.begin("10.21.209.70", 8080, "/");
   webSocket.onEvent(webSocketEvent);
-
-//  // use HTTP Basic Authorization this is optional remove if not needed
-//  webSocket.setAuthorization("user", "Password");
-
-  // try ever 5000 again if connection has failed
   webSocket.setReconnectInterval(5000);
 
+  irrecv.enableIRIn();
 }
 int timer = millis();
 int curTimer = 0;
 void loop() {
   webSocket.loop();
 
-  curTimer = millis();
-  if(curTimer > timer+3000){
-    timer = curTimer;
-    sendHexToServer("Hi");
-//    webSocket.sendTXT("Hello World!");
+  if (millis() > timer+200 && irrecv.decode(&results)) {
+    // print() & println() can't handle printing long longs. (uint64_t)
+    //serialPrintUint64(results.value, HEX);
+    //Serial.println("");
+    String code = String((long)results.value, HEX);
+    webSocket.sendTXT("/setoutput " + code);
+    Serial.println("/setoutput " + code);
+    irrecv.resume();  // Receive the next value
+    timer = millis();
   }
 }
