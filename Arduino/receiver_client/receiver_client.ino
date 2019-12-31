@@ -65,7 +65,7 @@ void setup() {
     delay(100);
   }
   Serial.println("Local IP: " + WiFi.localIP());
-  webSocket.begin("10.107.208.53", 8080, "/");
+  webSocket.begin("10.21.209.70", 8080, "/");
   webSocket.onEvent(webSocketEvent);
   webSocket.setReconnectInterval(5000);
 
