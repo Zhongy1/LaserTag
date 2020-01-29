@@ -33,7 +33,7 @@
             console.log('websocket is connected ...')
 
             // sending a send event to websocket server
-            ws.send('/new')
+            ws.send('/connect')
         }
 
         // event emmited when receiving message 
