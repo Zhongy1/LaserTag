@@ -1,16 +1,4 @@
 
-
-*difference() {
-    n_edged_block([3+$t*10, 5, 5]);
-    translate([0, 0, 1]) n_edged_block([3+$t*10, 4, 5]);
-}
-//elongated_cylinder([1, 1, 4]);
-difference() {
-    solid_block_chamferred([10, 10, 10], 5*$t);
-    translate([0, 0, -0.001]) inner_chamferring([10-(5*$t + 1)*2, 10-(5*$t + 1)*2], 1);
-}
-//inner_chamferring([-1, -1], 1);
-
 //dimensions = [number of edges, distance from corner to center, height]
 module n_edged_block(dimensions) {
     n = dimensions[0];
