@@ -1,5 +1,5 @@
 include<variables.scad>
-use <base_module.scad>
+use <base_modules.scad>
 
 
 module ledCutout(offset = [0, 0, 0], rotation = [0, 0, 0]){
@@ -9,13 +9,13 @@ module ledCutout(offset = [0, 0, 0], rotation = [0, 0, 0]){
         
         
         translate([ledHousingW/2, 0, -ledHousingD/2])
-            solidBlock([ledHousingW, ledHousingD, ledHousingD]); 
+            solid_block([ledHousingW, ledHousingD, ledHousingD]); 
         
         translate([ledBrdW/2 + ledHousingW, 0, -ledBrdH/2])
-            solidBlock([ledBrdW, ledBrdL, ledBrdH]);
+            solid_block([ledBrdW, ledBrdL, ledBrdH]);
         
         translate([ledHousingW + ledBrdW + (compRegionW/2), 0, -ledBrdH/2])
-            solidBlock([compRegionW, compRegionL, ledBrdH]);
+            solid_block([compRegionW, compRegionL, ledBrdH]);
 
         
     }

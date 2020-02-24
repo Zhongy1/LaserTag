@@ -1,5 +1,6 @@
 include<variables.scad>
-use <base_module.scad>
+use <base_modules.scad>
+
 
 module ctlrCutout(offset = [0, 0, 0], rotation = [0, 0, 0]){
     ctlrRegionL = microCtlrHousingL - 6;
@@ -10,10 +11,10 @@ module ctlrCutout(offset = [0, 0, 0], rotation = [0, 0, 0]){
     translate(offset) rotate(rotation){
         
         
-        solidBlock([microCtlrHousingW, ctlrRegionL, microCtlrHousingH]);
+        solid_block([microCtlrHousingW, ctlrRegionL, microCtlrHousingH]);
         
         translate([0, 0, legH]){
-            solidBlock([microCtlrHousingW, microCtlrHousingL, brdT]);
+            solid_block([microCtlrHousingW, microCtlrHousingL, brdT]);
         }
         
         
