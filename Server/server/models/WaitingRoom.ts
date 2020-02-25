@@ -1,6 +1,6 @@
-import { Player } from './Player';
+import Player from './Player';
 
-export class WaitingRoom {
+export default class WaitingRoom {
 
     private roomID: number;
     private players: Player[];
@@ -10,11 +10,11 @@ export class WaitingRoom {
         this.players = [];
     }
 
-    public addPlayer = (player: Player) => {
+    public addPlayer(player: Player): void {
         this.players.push(player);
     }
 
-    public removePlayer = (playerID: string) => {
+    public removePlayer(playerID: string) {
         this.players = this.players.filter((player) => player.id != playerID);
     }
 }
