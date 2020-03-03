@@ -14,7 +14,7 @@ export default class WaitingRoom {
         this.players.push(player);
     }
 
-    public removePlayer(playerID: string) {
-        this.players = this.players.filter((player) => player.id != playerID);
+    public removePlayer(playerID: number) {
+        this.players = this.players.filter((player) => player.getID() != playerID);
     }
 }
