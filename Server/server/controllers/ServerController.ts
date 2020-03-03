@@ -13,7 +13,7 @@ export default class ServerController {
         this.connections = {};
     }
 
-    public parseCmd(message: string) {
+    public parseCmd(cmd: string) {
 
     }
     public handle(ws: WebSocket, id: string) {
