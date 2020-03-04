@@ -98,3 +98,19 @@ module _format_(shift = [0, 0, 0], rotation = [0, 0, 0]) {
     
     }}
 }
+
+
+//for wire path
+module wire_path(start, end, width, height){
+    vector = [end[0] - start[0], end[1] - start[1]];
+    angle = atan(vector[1] / vector[0]) + 90 * ((vector[0] / abs(vector[0]) - 1));
+    length = sqrt(pow(vector[0], 2)) + pow(vector[1], 2);
+    
+    
+    
+    
+    translate(start) rotate([0, 0, angle])
+        translate([length/2, 0, -height/2])
+            solid_block([length, width, height]);
+    
+    }
