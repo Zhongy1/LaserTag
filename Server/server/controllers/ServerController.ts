@@ -1,6 +1,5 @@
 import WebSocket from 'ws';
-import Player from './Player';
-import WaitingRoom from './WaitingRoom';
+import WaitingRoom from '../models/WaitingRoom';
 import Player from '../models/Player';
 
 export default class ServerController {
