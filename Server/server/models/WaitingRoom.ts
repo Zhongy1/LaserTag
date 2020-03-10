@@ -13,11 +13,7 @@ export default class WaitingRoom {
         this.players.push(player);
     }
 
-    public removePlayer(playerID: string): void {
-        this.players = this.players.filter((player) => player.id != parseInt(playerID));
-    }
-
-    public get(id: number): Player {
-        return this.players[id];
+    public removePlayer(playerID: number) {
+        this.players = this.players.filter((player) => player.getID() != playerID);
     }
 }
