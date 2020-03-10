@@ -1,9 +1,8 @@
 import Player from './Player';
 
 export default class WaitingRoom {
-
-    private roomID: number;
     private players: Player[];
+    public readonly roomID: number;
 
     constructor(roomID: number) {
         this.roomID = roomID;

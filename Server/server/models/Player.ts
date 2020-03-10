@@ -1,18 +1,18 @@
 import WebSocket from 'ws';
 
 export default class Player {
-    private blaster: WebSocket;
-    private vest: WebSocket;
-    private id: number;
-    private team: string;
-    private isAlive: boolean;
+    private readonly blaster: WebSocket;
+    private readonly vest: WebSocket;
+    private alive: boolean;
+    public readonly id: number;
+    public team: string;
 
-    constructor(blaster: WebSocket, vest: WebSocket, id: number, isAlive: boolean = true, team: string = 'default') {
+    constructor(blaster: WebSocket, vest: WebSocket, id: number, alive: boolean = true, team: string = 'default') {
         this.blaster = blaster;
         this.vest = vest;
+        this.alive = alive;
         this.id = id;
         this.team = team;
-        this.isAlive = isAlive;
         this.listen();
     }
 
@@ -34,27 +34,15 @@ export default class Player {
         this.vest.send(message);
     }
 
-    public getID(): number {
-        return this.id;
+    public isAlive(): boolean {
+        return this.alive;
     }
 
-    public setID(newID: number): void {
-        this.id = newID;
+    public kill(): void {
+        this.alive = false;
     }
 
-    public getTeam(): string {
-        return this.team;
-    }
-
-    public setTeam(newTeam: string): void {
-        this.team = newTeam;
-    }
-
-    public getAliveState(): boolean {
-        return this.isAlive;
-    }
-
-    public setAliveState(newState: boolean): void {
-        this.isAlive = newState;
+    public revive(): void {
+        this.alive = true;
     }
 }
