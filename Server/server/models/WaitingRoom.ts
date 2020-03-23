@@ -4,8 +4,8 @@ export default class WaitingRoom {
     private players: Player[];
     public readonly roomID: number;
 
-    constructor(roomID: number) {
-        this.roomID = roomID;
+    constructor() {
+        this.roomID = 0;
         this.players = [];
     }
 
