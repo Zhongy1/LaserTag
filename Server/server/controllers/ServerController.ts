@@ -25,7 +25,7 @@ export default class ServerController {
     public wss: WebSocket.Server;
 
     constructor() {
-        this.waitingRoom = new WaitingRoom(0);
+        this.waitingRoom = new WaitingRoom();
         this.connections = {};
         this.hasStarted = false;
     }
