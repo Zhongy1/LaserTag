@@ -1,35 +1,36 @@
 import WebSocket from 'ws';
+import { Team } from './GameRoom';
 
 export default class Player {
+
     private readonly blaster: WebSocket;
     private readonly vest: WebSocket;
     private alive: boolean;
     public readonly id: number;
-    public team: string;
+    public team: Team;
+    public score: number;
 
-    constructor(blaster: WebSocket, vest: WebSocket, id: number, alive: boolean = true, team: string = 'default') {
+    constructor(blaster: WebSocket, vest: WebSocket, id: number, alive: boolean = true) {
         this.blaster = blaster;
         this.vest = vest;
         this.alive = alive;
         this.id = id;
-        this.team = team;
-        this.listen();
     }
 
-    private listen(): void {
-        this.blaster.on('message', message => {
-           console.log("In player: " + message);
-        });
-
-        this.vest.on('message', message => {
-            console.log("In player: " + message);
-        });
-    }
-
+    /**
+     * Sends a message to the blaster node of this player
+     *
+     * @param message - the message to send
+     */
     public toBlaster(message: string): void {
         this.blaster.send(message);
     }
 
+    /**
+     * Sends a message to the vest node of this player
+     *
+     * @param message - the message to send
+     */
     public toVest(message: string): void {
         this.vest.send(message);
     }
