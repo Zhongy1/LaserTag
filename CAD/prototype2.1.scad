@@ -2,6 +2,9 @@ use <base_modules.scad>
 include<variables.scad>
 use <controlCutout.scad>
 use <ledCutout.scad>
+use <boostConverter.scad>
+use <batteryCutOut.scad>
+use <switchCutOut.scad>
 
 gun_bottom();
 
@@ -15,13 +18,17 @@ module gun_bottom() {
             solid_block([300, 200, gunPieceNozzleW/2]);
         }
         ctlrCutoutV2([-70, 0, gunPieceNozzleW/2 - microCtlrHousingH/2]);
+        translate([0, 0, gunPieceNozzleW/2])wire_path([-gunPieceNozzleL + 3.5 + 10, 0],[-70, 0], 5, 5);
         ledCutout([-gunPieceNozzleL + 3.5, 0, gunPieceNozzleW/2]);
+        boostCnvtr([-17, 15, gunPieceNozzleW/2 - cnvrtrHousingH/2], [0, 0, 90]);
+        translate([0, 0, gunPieceNozzleW/2])wire_path([-17,15], [-70, 0], 5, 5);
+        translate([38, -26, 0])batteryCutOut([0, 0, gunPieceNozzleW/2 - batteryHousingH/2], [0, 0, -130]);
+        switchCutout([-10, -25, gunPieceNozzleW/2 - switchHousingH/2], [0, 0, 50]);
     }
 }
 
 module body(){
-    translate([-3.5, -1, 0]){
-        
+    translate([-3.5, -1, 0]){  
     rotate([0, 90, 0])
         difference(){
                     solid_cylinder([gunPieceNozzleW, gunPieceNozzleW, gunPieceNozzleL]);
