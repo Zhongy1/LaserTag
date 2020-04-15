@@ -1,8 +1,8 @@
 import Player from './Player';
 
 export default class WaitingRoom {
-    private players: Player[];
-    public readonly roomID: number;
+    public players: Player[];
+    public roomID: number;
 
     constructor() {
         this.roomID = 0;
@@ -13,7 +13,12 @@ export default class WaitingRoom {
         this.players.push(player);
     }
 
-    public removePlayer(playerID: number) {
-        this.players = this.players.filter((player) => player.getID() != playerID);
+    public removePlayer(playerToDelete: Player): void {
+        this.players = this.players.filter(player => player != playerToDelete);
+    }
+
+    public printPlayers(): void {
+        console.log('In waiting room: ');
+        this.players.forEach(player => console.log('- ' + player.id));
     }
 }
