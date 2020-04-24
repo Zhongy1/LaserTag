@@ -1,22 +1,17 @@
-# lasertagserver
+# Laser Tag Server
 
 > Server component of laser tag system
 
-## Build Setup
+## Running the server
 
-``` bash
-# install dependencies
-$ npm run install
+```bash
+# Open a new terminal, install dependencies and run the backend server
+$ cd LaserTag/Server/Backend/
+$ npm i
+$ npm run prod
 
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
+# Open a new terminal, install dependencies and start serving the frontend
+$ cd LaserTag/Server/Frontend/
+$ npm i
+$ npm run serve
 ```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
