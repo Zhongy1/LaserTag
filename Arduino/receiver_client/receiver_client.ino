@@ -1,11 +1,3 @@
-
-/*
- * WebSocketClient.ino
- *
- *  Created on: 24.05.2015
- *
- */
-
 #include <Arduino.h>
 
 #include <ESP8266WiFi.h>
@@ -19,11 +11,20 @@
 ESP8266WiFiMulti WiFiMulti;
 WebSocketsClient webSocket;
 
+#define SSID "LugBuild"
+#define password "esp8266testing"
+
+String ID = "S01";
+
+#define serverIP "10.21.209.70"
+#define port 8080
+
+bool isDead = false;
+
 const uint16_t kRecvPin = D1;
 IRrecv irrecv(kRecvPin);
 decode_results results;
 
-#define USE_SERIAL Serial
 void sendHexToServer(String s){
   webSocket.sendTXT(s);
 }
@@ -31,59 +32,65 @@ void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
 
   switch(type) {
     case WStype_DISCONNECTED:
-      USE_SERIAL.printf("[WSc] Disconnected!\n");
+      Serial.printf("[WSc] Disconnected!\n");
       break;
     case WStype_CONNECTED: {
-      USE_SERIAL.printf("[WSc] Connected to url: %s\n", payload);
-
-      // send message to server when Connected
-      // webSocket.sendTXT("Connected");
+      Serial.printf("[WSc] Connected to url: %s\n", payload);
+      webSocket.sendTXT("/connect " + ID);
     }
       break;
     case WStype_TEXT:
-      USE_SERIAL.printf("[WSc] get text: %s\n", payload);
-
-      // send message to server
-      // webSocket.sendTXT("message here");
-      break;
-    case WStype_BIN:
-      USE_SERIAL.printf("[WSc] get binary length: %u\n", length);
-      hexdump(payload, length);
-
-      // send data to server
-      // webSocket.sendBIN(payload, length);
+      Serial.printf("[WSc] get text: %s\n", payload);
+      handleServerCmds(payload);
       break;
   }
 
+}
+
+bool checkValidID(String id) {
+  if (id.length() != 3) return false;
+  if (id[0] != 'B') return false;
+  return true;
+}
+
+void handleServerCmds(uint8_t * payload) {
+  if (strcmp((const char *)payload, "/killthis")) {
+    isDead = true;
+  }
+  else if (strcmp((const char *)payload, "/reset")) {
+    isDead = false;
+  }
 }
 
 void setup() {
   Serial.begin(115200);
   delay(3000);
-  WiFiMulti.addAP("LugBuild", "esp8266testing");
+  WiFiMulti.addAP(SSID, password);
   while(WiFiMulti.run() != WL_CONNECTED) {
     delay(100);
   }
   Serial.println("Local IP: " + WiFi.localIP());
-  webSocket.begin("10.21.209.70", 8080, "/");
+  webSocket.begin(serverIP, port, "/");
   webSocket.onEvent(webSocketEvent);
   webSocket.setReconnectInterval(5000);
 
   irrecv.enableIRIn();
 }
-int timer = millis();
-int curTimer = 0;
+
+
+int lastCheck = millis();
 void loop() {
   webSocket.loop();
 
-  if (millis() > timer+200 && irrecv.decode(&results)) {
-    // print() & println() can't handle printing long longs. (uint64_t)
-    //serialPrintUint64(results.value, HEX);
-    //Serial.println("");
+  if (!isDead && millis() > lastCheck+200 && irrecv.decode(&results)) {
     String code = String((long)results.value, HEX);
-    webSocket.sendTXT("/setoutput " + code);
-    Serial.println("/setoutput " + code);
-    irrecv.resume();  // Receive the next value
-    timer = millis();
+    if (checkValidID(code)) {
+      webSocket.sendTXT("/attack " + code + " " + ID);
+      Serial.println("/attack " + code + " " + ID);
+    }
+    irrecv.resume();
+    lastCheck = millis();
   }
 }
+
+
