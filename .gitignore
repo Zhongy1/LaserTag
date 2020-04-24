@@ -1,5 +1,4 @@
 .DS_Store
 
-Server/node_modules/
-Server/package-lock.json
+Server/Backend/node_modules/
 Server/.nuxt/

@@ -3,6 +3,7 @@ import WaitingRoom from '../models/WaitingRoom';
 import Player from '../models/Player';
 import GameRoom from '../models/GameRoom';
 
+import consola from 'consola';
 import chalk from 'chalk';
 
 /**
@@ -47,7 +48,13 @@ export default class ServerController {
         }
 
         // Instantiate socket server
-        this.wss = new WebSocket.Server({ port: 8080 });
+        this.wss = new WebSocket.Server({ port: 8080 }, () => {
+            consola.ready({
+                message: `Server is online! Listening for socket connections on port 8080`,
+                tag: 'express:lasertag',
+                badge: true
+            });
+        });
 
         // Handle each new connection
         this.wss.on('connection', ws => {
